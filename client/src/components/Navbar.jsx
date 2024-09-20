@@ -4,22 +4,24 @@ import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 
-import Auth from '../utils.auth';
+import Auth from '../utils/auth';
 
 const AppNavbar = () => {
-  // State to manage modal display
+  // State to control the display of the modal
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
+          {/* Brand name linking to the home page */}
           <Navbar.Brand as={Link} to='/'>
             Google Books Search
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
+              {/* Link to the search page */}
               <Nav.Link as={Link} to='/'>
                 Search For Books
               </Nav.Link>
@@ -39,7 +41,7 @@ const AppNavbar = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* Modal setup */}
+      {/* Modal setup for login/signup */}
       <Modal
         size='lg'
         show={showModal}
@@ -61,9 +63,11 @@ const AppNavbar = () => {
           </Modal.Header>
           <Modal.Body>
             <Tab.Content>
+              {/* Login form tab */}
               <Tab.Pane eventKey='login'>
                 <LoginForm handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
+              {/* Signup form tab */}
               <Tab.Pane eventKey='signup'>
                 <SignUpForm handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
