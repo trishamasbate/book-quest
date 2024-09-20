@@ -1,3 +1,9 @@
+// Load environment variables from .env file
+require('dotenv').config();
+
+// Optional: Log the MongoDB URI to verify it's being loaded correctly
+console.log('MongoDB URI:', process.env.MONGODB_URI);
+
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
