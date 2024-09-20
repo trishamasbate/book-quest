@@ -4,17 +4,17 @@
 [![license](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://choosealicense.com/licenses/mit/)
 
 
-## 📃 Description:
+## 📃 Description
 **Book Quest** is a project that enhances an existing Google Books API search engine by refactoring it from a traditional RESTful API to a modern GraphQL API, leveraging Apollo Server for efficient data querying and management. The app is built using the MERN stack, with a React front end, MongoDB database, and Node.js/Express.js server and API.
 
 ## 📌 Table of Contents
 - [📖 Book Quest Book Finder](#-book-quest-book-finder)
-  - [📃 Description:](#-description)
+  - [📃 Description](#-description)
   - [📌 Table of Contents](#-table-of-contents)
   - [🔎 User Story](#-user-story)
   - [✅ Acceptance Criteria](#-acceptance-criteria)
   - [💡 Usage and Installation Instructions](#-usage-and-installation-instructions)
-  - [🎞️ Application Previews:](#️-application-previews)
+  - [🎞️ Application Previews](#️-application-previews)
   - [🗝️ Resources](#️-resources)
   - [❓ Questions](#-questions)
   - [🪪 License](#-license)
@@ -81,7 +81,7 @@ MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.44mlj.mongodb.net/<data
 7.  Test the functionality of the application by using Render.
 
 
-## 🎞️ Application Previews:
+## 🎞️ Application Previews
 
 **Login Page**
 ![](./public/login-page.png)
