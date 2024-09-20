@@ -1,14 +1,15 @@
 // Load environment variables from .env file
 require('dotenv').config();
 
-// Optional: Log the MongoDB URI to verify it's being loaded correctly
-console.log('MongoDB URI:', process.env.MONGODB_URI);
+console.log('MongoDB URI:', process.env.MONGODB_URI); // This should output your connection string
+
 
 const express = require('express');
 const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const path = require('path');
 const { authMiddleware } = require('./utils/auth');
+const mongoose = require('mongoose');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
