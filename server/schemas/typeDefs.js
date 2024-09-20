@@ -1,4 +1,3 @@
-// Define the GraphQL schema using the SDL (Schema Definition Language)
 const typeDefs = `
     type User {
         _id: ID!
@@ -43,5 +42,4 @@ const typeDefs = `
     }
 `;
 
-// Export the type definitions for use in the GraphQL server setup
 module.exports = typeDefs;

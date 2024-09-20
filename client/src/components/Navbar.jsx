@@ -7,25 +7,23 @@ import LoginForm from './LoginForm';
 import Auth from '../utils/auth';
 
 const AppNavbar = () => {
-  // State to control the display of the modal
+  // set modal display state
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
       <Navbar bg='dark' variant='dark' expand='lg'>
         <Container fluid>
-          {/* Brand name linking to the home page */}
           <Navbar.Brand as={Link} to='/'>
             Google Books Search
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
             <Nav className='ml-auto d-flex'>
-              {/* Link to the search page */}
               <Nav.Link as={Link} to='/'>
                 Search For Books
               </Nav.Link>
-              {/* If user is logged in, show saved books and logout options */}
+              {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to='/saved'>
@@ -34,20 +32,19 @@ const AppNavbar = () => {
                   <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
-                // If user is not logged in, show login/signup option
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
               )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* Modal setup for login/signup */}
+      {/* set modal data up */}
       <Modal
         size='lg'
         show={showModal}
         onHide={() => setShowModal(false)}
         aria-labelledby='signup-modal'>
-        {/* Tab container to switch between login and signup forms */}
+        {/* tab container to do either signup or login component */}
         <Tab.Container defaultActiveKey='login'>
           <Modal.Header closeButton>
             <Modal.Title id='signup-modal'>
@@ -63,11 +60,9 @@ const AppNavbar = () => {
           </Modal.Header>
           <Modal.Body>
             <Tab.Content>
-              {/* Login form tab */}
               <Tab.Pane eventKey='login'>
                 <LoginForm handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
-              {/* Signup form tab */}
               <Tab.Pane eventKey='signup'>
                 <SignUpForm handleModalClose={() => setShowModal(false)} />
               </Tab.Pane>
