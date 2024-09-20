@@ -1,18 +1,22 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
+// Export Vite configuration
 export default defineConfig({
+  // Include the React plugin for Vite
   plugins: [react()],
   server: {
+    // Set the development server to run on port 3000
     port: 3000,
+    // Automatically open the browser when the server starts
     open: true,
     proxy: {
-      '/api': {
-        target: 'http://localhost:3001',
-        secure: false,
-        changeOrigin: true
+      // Proxy API requests to the backend server
+      '/graphql': {
+        target: 'http://localhost:3001', // Backend server URL
+        secure: false, // Disable SSL verification for the proxy
+        changeOrigin: true // Change the origin of the host header to the target URL
       }
     }
   }
-})
+});
