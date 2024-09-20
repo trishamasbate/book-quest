@@ -1,39 +1,50 @@
+const { GraphQLError } = require('graphql');
 const jwt = require('jsonwebtoken');
 
-// set token secret and expiration date
-const secret = 'mysecretsshhhhh';
+// Define the secret key and token expiration time
+const secret = 'mysecretssshhhhhh';
 const expiration = '2h';
 
 module.exports = {
-  // function for our authenticated routes
-  authMiddleware: function (req, res, next) {
-    // allows token to be sent via  req.query or headers
-    let token = req.query.token || req.headers.authorization;
+  // Define a custom GraphQL error for authentication failures
+  AuthenticationError: new GraphQLError('Could not authenticate user.', {
+    extensions: {
+      code: 'UNAUTHENTICATED',
+    },
+  }),
+  
+  // Middleware function to authenticate requests
+  authMiddleware: function ({ req }) {
+    // Allow token to be sent via req.body, req.query, or headers
+    let token = req.body.token || req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
+    // If the token is sent via the authorization header, extract the actual token value
     if (req.headers.authorization) {
       token = token.split(' ').pop().trim();
     }
 
+    // If no token is found, return the request object as is
     if (!token) {
-      return res.status(400).json({ message: 'You have no token!' });
+      return req;
     }
 
-    // verify token and get user data out of it
+    // Verify the token and add the decoded user's data to the request object
     try {
       const { data } = jwt.verify(token, secret, { maxAge: expiration });
       req.user = data;
     } catch {
       console.log('Invalid token');
-      return res.status(400).json({ message: 'invalid token!' });
     }
 
-    // send to next endpoint
-    next();
+    // Return the request object so it can be passed to the resolver as `context`
+    return req;
   },
-  signToken: function ({ username, email, _id }) {
-    const payload = { username, email, _id };
 
+  // Function to sign a new token with user data
+  signToken: function ({ email, name, _id }) {
+    // Create a payload with the user's email, name, and ID
+    const payload = { email, name, _id };
+    // Sign the token with the secret key and set the expiration time
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   },
 };
